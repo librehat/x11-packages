@@ -1,0 +1,29 @@
+--- src/src/corelib/plugin/qfactoryloader.cpp	2020-10-27 08:02:11.000000000 +0000
++++ src.mod/src/corelib/plugin/qfactoryloader.cpp	2021-05-05 16:31:56.087333346 +0000
+@@ -196,7 +196,7 @@
+             continue;
+         d->loadedPaths << pluginDir;
+ 
+-#ifdef Q_OS_ANDROID
++#if defined(Q_OS_ANDROID) && !defined(Q_OS_ANDROID_EMBEDDED)
+         QString path = pluginDir;
+ #else
+         QString path = pluginDir + d->suffix;
+@@ -211,7 +211,7 @@
+         QStringList plugins = QDir(path).entryList(
+ #if defined(Q_OS_WIN)
+                     QStringList(QStringLiteral("*.dll")),
+-#elif defined(Q_OS_ANDROID)
++#elif defined(Q_OS_ANDROID) && !defined(Q_OS_ANDROID_EMBEDDED)
+                     QStringList(QLatin1String("libplugins_%1_*.so").arg(d->suffix)),
+ #endif
+                     QDir::Files);
+@@ -349,7 +349,7 @@
+ #if QT_CONFIG(library)
+     d->cs = cs;
+     d->suffix = suffix;
+-# ifdef Q_OS_ANDROID
++# if defined(Q_OS_ANDROID) && !defined(Q_OS_ANDROID_EMBEDDED)
+     if (!d->suffix.isEmpty() && d->suffix.at(0) == QLatin1Char('/'))
+         d->suffix.remove(0, 1);
+ # endif
