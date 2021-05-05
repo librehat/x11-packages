@@ -117,5 +117,5 @@ cd "qtbase-everywhere-src-${TERMUX_PKG_VERSION}" && {
     cd ../
 }
 
-echo "[*] Done. Check file './qmake-android-$(uname -m)'."
+echo "[*] Done. Check file './qmake-$(uname -m)-linux-android'."
 cp "qtbase-everywhere-src-${TERMUX_PKG_VERSION}/qmake/qmake" "./qmake-$(uname -m)-linux-android"

@@ -19,20 +19,20 @@ unchanged:
 +# define shmid_ds shmid64_ds
 +#endif
 +
-+static void * (*android_shmat)(int shmid, const void *shmaddr, int shmflg) = NULL;
-+static int (*android_shmdt)(const void *shmaddr) = NULL;
-+static int (*android_shmget)(key_t key, size_t size, int shmflg) = NULL;
-+static int (*android_shmctl)(int shmid, int cmd, struct shmid_ds *buf) = NULL;
++void * (*android_shmat)(int shmid, const void *shmaddr, int shmflg) = NULL;
++int (*android_shmdt)(const void *shmaddr) = NULL;
++int (*android_shmget)(key_t key, size_t size, int shmflg) = NULL;
++int (*android_shmctl)(int shmid, int cmd, struct shmid_ds *buf) = NULL;
 +
-+static void * shmat(int shmid, const void *shmaddr, int shmflg) {
++void * shmat(int shmid, const void *shmaddr, int shmflg) {
 +	if (!android_shmat) {
 +		void *handle = dlopen("@TERMUX_PREFIX@/lib/libandroid-shmem.so", RTLD_LOCAL | RTLD_LAZY);
 +
 +		if (!handle) {
-+				abort();
++				return (void*)(-1);
 +		}
 +
-+		android_shmat = dlsym(handle, "shmat");
++		reinterpret_cast<void*&>(android_shmat) = dlsym(handle, "shmat");
 +
 +		dlclose(handle);
 +	}
@@ -40,15 +40,15 @@ unchanged:
 +	return android_shmat(shmid, shmaddr, shmflg);
 +}
 +
-+static int shmdt(const void *shmaddr) {
++int shmdt(const void *shmaddr) {
 +	if (!android_shmdt) {
 +		void *handle = dlopen("@TERMUX_PREFIX@/lib/libandroid-shmem.so", RTLD_LOCAL | RTLD_LAZY);
 +
 +		if (!handle) {
-+				abort();
++				return -1;
 +		}
 +
-+		android_shmdt = dlsym(handle, "shmdt");
++		reinterpret_cast<void*&>(android_shmdt) = dlsym(handle, "shmdt");
 +
 +		dlclose(handle);
 +	}
@@ -56,15 +56,15 @@ unchanged:
 +	return android_shmdt(shmaddr);
 +}
 +
-+static int shmget(key_t key, size_t size, int shmflg) {
++int shmget(key_t key, size_t size, int shmflg) {
 +	if (!android_shmget) {
 +		void *handle = dlopen("@TERMUX_PREFIX@/lib/libandroid-shmem.so", RTLD_LOCAL | RTLD_LAZY);
 +
 +		if (!handle) {
-+				abort();
++				return -1;
 +		}
 +
-+		android_shmget = dlsym(handle, "shmget");
++		reinterpret_cast<void*&>(android_shmget) = dlsym(handle, "shmget");
 +
 +		dlclose(handle);
 +	}
@@ -72,15 +72,15 @@ unchanged:
 +	return android_shmget(key, size, shmflg);
 +}
 +
-+static int shmctl(int shmid, int cmd, struct shmid_ds *buf) {
++int shmctl(int shmid, int cmd, struct shmid_ds *buf) {
 +	if (!android_shmctl) {
 +		void *handle = dlopen("@TERMUX_PREFIX@/lib/libandroid-shmem.so", RTLD_LOCAL | RTLD_LAZY);
 +
 +		if (!handle) {
-+				abort();
++				return -1;
 +		}
 +
-+		android_shmctl = dlsym(handle, "shmctl");
++		reinterpret_cast<void*&>(android_shmctl) = dlsym(handle, "shmctl");
 +
 +		dlclose(handle);
 +	}
