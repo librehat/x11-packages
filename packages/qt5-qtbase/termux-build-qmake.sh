@@ -22,7 +22,7 @@ fi
 
 apt update
 apt upgrade -y
-apt install -y coreutils clang curl debianutils make
+apt install -y coreutils clang curl debianutils libandroid-shmem make
 hash -r
 
 ## Override function from build.sh since we are
@@ -48,7 +48,6 @@ termux_step_configure () {
         -no-pch \
         -no-accessibility \
         -no-glib \
-        -no-eventfd \
         -icu \
         -system-pcre \
         -system-zlib \

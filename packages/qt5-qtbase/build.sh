@@ -3,7 +3,7 @@ TERMUX_PKG_DESCRIPTION="A cross-platform application and UI framework"
 TERMUX_PKG_LICENSE="LGPL-3.0"
 TERMUX_PKG_MAINTAINER="Simeon Huang <symeon@librehat.com>"
 TERMUX_PKG_VERSION=5.15.2
-TERMUX_PKG_REVISION=2
+TERMUX_PKG_REVISION=5
 TERMUX_PKG_SRCURL="https://download.qt.io/official_releases/qt/5.15/${TERMUX_PKG_VERSION}/submodules/qtbase-everywhere-src-${TERMUX_PKG_VERSION}.tar.xz"
 TERMUX_PKG_SHA256=909fad2591ee367993a75d7e2ea50ad4db332f05e1c38dd7a5a274e156a4e0f8
 TERMUX_PKG_DEPENDS="dbus, harfbuzz, libandroid-shmem, libc++, libice, libicu, libjpeg-turbo, libpng, libsm, libuuid, libx11, libxcb, libxi, libxkbcommon, openssl, pcre2, ttf-dejavu, freetype, xcb-util-image, xcb-util-keysyms, xcb-util-renderutil, xcb-util-wm, zlib"
@@ -69,7 +69,6 @@ termux_step_configure () {
         -no-pch \
         -no-accessibility \
         -no-glib \
-        -no-eventfd \
         -icu \
         -system-pcre \
         -system-zlib \

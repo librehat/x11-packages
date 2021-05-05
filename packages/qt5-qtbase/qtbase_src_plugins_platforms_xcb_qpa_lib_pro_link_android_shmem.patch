@@ -1,0 +1,11 @@
+--- src/src/plugins/platforms/xcb/xcb_qpa_lib.pro	2021-05-05 18:27:18.939677625 +0000
++++ src.mod/src/plugins/platforms/xcb/xcb_qpa_lib.pro	2021-05-05 18:29:58.942769299 +0000
+@@ -16,6 +16,8 @@
+ 
+ qtConfig(glib) : QMAKE_USE_PRIVATE += glib
+ 
++LIBS += -landroid-shmem
++
+ SOURCES = \
+         qxcbclipboard.cpp \
+         qxcbconnection.cpp \

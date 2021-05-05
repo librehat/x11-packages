@@ -1,0 +1,11 @@
+--- src/src/corelib/corelib.pro	2021-05-05 18:18:22.190665335 +0000
++++ src.mod/src/corelib/corelib.pro	2021-05-05 18:19:43.594217981 +0000
+@@ -29,6 +29,8 @@
+     android.permission.INTERNET \
+     android.permission.WRITE_EXTERNAL_STORAGE
+ 
++LIBS_PRIVATE += -landroid-shmem
++
+ # QtCore can't be compiled with -Wl,-no-undefined because it uses the "environ"
+ # variable and on FreeBSD and OpenBSD, this variable is in the final executable itself.
+ # OpenBSD 6.0 will include environ in libc.
