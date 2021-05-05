@@ -1,3 +1,4 @@
+unchanged:
 --- src/src/plugins/platforms/xcb/qxcbbackingstore.cpp	2020-10-27 08:02:11.000000000 +0000
 +++ src.mod/src/plugins/platforms/xcb/qxcbbackingstore.cpp	2021-05-05 20:16:15.136703363 +0000
 @@ -49,7 +49,8 @@
@@ -91,3 +92,16 @@
  class QXcbBackingStore;
  
  class QXcbBackingStoreImage : public QXcbObject
+only in patch2:
+unchanged:
+--- src/src/plugins/platforms/xcb/xcb_qpa_lib.pro	2021-05-05 18:27:18.939677625 +0000
++++ src.mod/src/plugins/platforms/xcb/xcb_qpa_lib.pro	2021-05-05 18:29:58.942769299 +0000
+@@ -16,6 +16,8 @@
+ 
+ qtConfig(glib) : QMAKE_USE_PRIVATE += glib
+ 
++LIBS += -landroid-shmem
++
+ SOURCES = \
+         qxcbclipboard.cpp \
+         qxcbconnection.cpp \
