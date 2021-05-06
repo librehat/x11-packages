@@ -1,0 +1,11 @@
+--- src/src/widgets/widgets/qdockwidget.cpp	2021-05-06 08:40:24.921694025 +0000
++++ src.mod/src/widgets/widgets/qdockwidget.cpp	2021-05-06 08:41:07.240867818 +0000
+@@ -281,7 +281,7 @@
+  */
+ bool QDockWidgetLayout::wmSupportsNativeWindowDeco()
+ {
+-#if defined(Q_OS_ANDROID)
++#if defined(Q_OS_ANDROID) && !defined(Q_OS_ANDROID_EMBEDDED)
+     return false;
+ #else
+     static const bool xcb = !QGuiApplication::platformName().compare(QLatin1String("xcb"), Qt::CaseInsensitive);
