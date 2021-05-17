@@ -1,0 +1,13 @@
+qcollectiongenerator is not built for the host at the moment
+the cmake module detection would error out if unpatched
+--- src/sources/pyside2/CMakeLists.txt	2019-11-20 10:19:50.000000000 +0000
++++ src.mod/sources/pyside2/CMakeLists.txt	2021-05-16 17:14:31.565136301 +0000
+@@ -258,7 +258,7 @@
+ endif()
+ 
+ # Collect all optional modules.
+-set(ALL_OPTIONAL_MODULES Xml XmlPatterns Help Multimedia
++set(ALL_OPTIONAL_MODULES Xml XmlPatterns Multimedia
+ MultimediaWidgets OpenGL OpenGLFunctions Positioning Location Qml Quick QuickWidgets RemoteObjects Scxml Script ScriptTools Sensors TextToSpeech Charts Svg DataVisualization)
+ find_package(Qt5UiTools)
+ if(Qt5UiTools_FOUND)

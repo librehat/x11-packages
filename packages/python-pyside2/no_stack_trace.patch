@@ -1,0 +1,20 @@
+--- src/sources/shiboken2/libshiboken/signature.cpp	2019-11-20 10:19:50.000000000 +0000
++++ src.mod/sources/shiboken2/libshiboken/signature.cpp	2021-05-17 14:23:41.338621965 +0000
+@@ -828,7 +828,7 @@
+ // our new version.
+ //
+ 
+-#ifndef _WIN32
++#if !defined(_WIN32) && !defined(__ANDROID__)
+ ////////////////////////////////////////////////////////////////////////////
+ // a stack trace for linux-like platforms
+ #include <stdio.h>
+@@ -872,7 +872,7 @@
+             || add_more_getsets(Py_TYPE(wrap_descr),     new_PyWrapperDescr_getsets, &old_wd_doc_descr) < 0
+             )
+             return -1;
+-#ifndef _WIN32
++#if !defined(_WIN32) && !defined(__ANDROID__)
+         // We enable the stack trace in CI, only.
+         const char *testEnv = getenv("QTEST_ENVIRONMENT");
+         if (testEnv && strstr(testEnv, "ci"))
